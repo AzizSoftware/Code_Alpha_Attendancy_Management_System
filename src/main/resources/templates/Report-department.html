@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Report Department</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            font-family: 'Verdana', sans-serif;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: rgba(0, 0, 0, 0.526);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.492);
+            animation: titleAnimation 1.5s ease-in-out;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        form p {
+            margin-bottom: 10px;
+        }
+        input[type=number], input[type=submit] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type=submit] {
+            background: linear-gradient(145deg, #4facfe, #00f2fe);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type=submit]:hover {
+            background: linear-gradient(145deg, #00f2fe, #4facfe);
+            transform: scale(1.15);
+        }
+        .report {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .report h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .report p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Report Department</h1>
+    <form th:action="@{/reports/generate}" method="post">
+        <p>Student ID: <input type="number" name="studentId" required></p>
+        <p><input type="submit" value="Generate Report"></p>
+    </form>
+    <div class="report" th:if="${report}">
+        <h2 th:text="'Report for ' + ${report.student.firstName} + ' ' + ${report.student.lastName}">Report for John Doe</h2>
+        <p th:text="'ID: ' + ${report.student.id}">ID: 1</p>
+        <p th:text="'Total Lessons: ' + ${report.totalLessons}">Total Lessons: 0</p>
+        <p th:text="'Attended Lessons: ' + ${report.attendedLessons}">Attended Lessons: 0</p>
+        <p th:text="'Attendance Percentage: ' + ${report.attendancePercentage} + '%'">Attendance Percentage: 0%</p>
+        <!-- Add more fields as needed -->
+    </div>
+    <div th:if="${error}" style="color: red; text-align: center;">
+        <p th:text="${error}"></p>
+    </div>
+</body>
+</html>

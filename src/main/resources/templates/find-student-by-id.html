@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Student by ID</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type=number] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type=submit] {
+            background-color: #1e90ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type=submit]:hover {
+            background-color: #00bfff;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .student-details {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .student-details h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .student-details p {
+            margin-bottom: 5px;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Student by ID</h1>
+
+    <!-- Form for finding student by ID -->
+    <form th:action="@{/students/find-by-id}" method="post">
+        <label for="studentId">Student ID:</label>
+        <input type="number" id="studentId" name="id" required>
+        <button type="submit">Find Student</button>
+    </form>
+
+    <!-- Display error message if student not found -->
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <!-- Display student details if found -->
+    <div th:if="${student}" class="student-details">
+        <h2>Student Details</h2>
+        <p><strong>ID:</strong> <span th:text="${student.id}"></span></p>
+        <p><strong>First Name:</strong> <span th:text="${student.firstName}"></span></p>
+        <p><strong>Last Name:</strong> <span th:text="${student.lastName}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${student.email}"></span></p>
+        <p><strong>Address:</strong> <span th:text="${student.address}"></span></p>
+        <p><strong>Phone Number:</strong> <span th:text="${student.phoneNumber}"></span></p>
+    </div>
+
+    <!-- Link back to the student department page -->
+    <p><a th:href="@{/students}">Back to Student Department</a></p>
+</body>
+</html>

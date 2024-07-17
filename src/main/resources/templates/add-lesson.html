@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Lesson</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            font-family: 'Verdana', sans-serif; /* Professional font */
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: rgba(0, 0, 0, 0.526);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.492); /* Text shadow for title */
+            animation: titleAnimation 1.5s ease-in-out;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.85);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        form p {
+            margin-bottom: 10px;
+        }
+        input[type=text], input[type=number], input[type=datetime-local], select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type=submit] {
+            background: linear-gradient(145deg, #4facfe, #00f2fe);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type=submit]:hover {
+            background: linear-gradient(145deg, #00f2fe, #4facfe);
+            transform: scale(1.15);
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            background: linear-gradient(145deg, #4facfe, #00f2fe);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background: linear-gradient(145deg, #00f2fe, #4facfe);
+            transform: scale(1.15);
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Lesson</h1>
+    <form th:action="@{/lessons/list/add-lesson}" method="post" th:object="${lesson}">
+        <p>Course:
+            <select th:field="*{course.id}">
+                <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.courseName}"></option>
+            </select>
+        </p>
+        <p>Start Time: <input type="datetime-local" th:field="*{startTime}"></p>
+        <p>End Time: <input type="datetime-local" th:field="*{endTime}"></p>
+        <!-- Teacher field will be automatically populated based on selected course -->
+        <p>Teacher:
+            <select th:field="*{teacher.id}" th:disabled="${true}">
+                <option th:value="${lesson.teacher.id}" th:text="${lesson.teacher.firstName + ' ' + lesson.teacher.lastName}"></option>
+            </select>
+        </p>
+        <p><input type="submit" value="Save"></p>
+    </form>
+    <a th:href="@{/lessons/list}">Back to List</a>
+</body>
+</html>

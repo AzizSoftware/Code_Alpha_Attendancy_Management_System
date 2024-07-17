@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Course by ID</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type=number] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type=submit] {
+            background-color: #1e90ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type=submit]:hover {
+            background-color: #00bfff;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .course-details {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .course-details h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .course-details p {
+            margin-bottom: 5px;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Course by ID</h1>
+
+    <!-- Form for finding course by ID -->
+    <form th:action="@{/courses/find-by-id}" method="post">
+        <label for="courseId">Course ID:</label>
+        <input type="number" id="courseId" name="id" required>
+        <button type="submit">Find Course</button>
+    </form>
+
+    <!-- Display error message if course not found -->
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <!-- Display course details if found -->
+    <div th:if="${course}" class="course-details">
+        <h2>Course Details</h2>
+        <p><strong>ID:</strong> <span th:text="${course.id}"></span></p>
+        <p><strong>Course Code:</strong> <span th:text="${course.courseCode}"></span></p>
+        <p><strong>Course Name:</strong> <span th:text="${course.courseName}"></span></p>
+        <p><strong>Department:</strong> <span th:text="${course.department}"></span></p>
+        <p><strong>Instructor:</strong> <span th:text="${course.instructor.firstName} + ' ' + ${course.instructor.lastName}"></span></p>
+        <p><strong>Credit Hours:</strong> <span th:text="${course.creditHours}"></span></p>
+    </div>
+    <!-- Link back to the course department page -->
+    <p><a th:href="@{/courses}">Back to Course Department</a></p>
+</body>
+</html>

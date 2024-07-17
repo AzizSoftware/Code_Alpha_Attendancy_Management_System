@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://example.com/background.jpg'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+        .container {
+            text-align: center;
+            padding: 50px;
+            background-color: rgba(237, 241, 245, 0.904); /* Lighter grey */
+            border-radius: 10px;
+            width: 60%;
+            margin: 100px auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.85);
+            animation: fadeIn 1.5s ease-in-out;
+           
+        }
+        h1 {
+            font-family: 'Verdana', sans-serif; /* Professional font */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: rgba(0, 0, 0, 0.526);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for title */
+            animation: titleAnimation 1.5s ease-in-out;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 1.2em;
+            color: #ffffff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(145deg, #4facfe, #00f2fe); /* Lighter gradient colors */
+            transition: background 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            background: linear-gradient(145deg, #00f2fe, #4facfe);
+            transform: scale(1.15);
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes titleAnimation {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Landing Page</h1>
+        <div>
+            <a th:href="@{/students}" class="button">Student Department</a>
+        </div>
+        <div>
+            <a th:href="@{/Teachers}" class="button">Teacher Department</a>
+        </div>
+        <div>
+            <a th:href="@{/lessons}" class="button">Lesson Department</a>
+        </div>
+        <div>
+            <a th:href="@{/courses}" class="button">Class Department</a>
+        </div>
+        <div>
+            <a th:href="@{/reports}" class="button">Report Department</a>
+        </div>
+    </div>
+</body>
+</html>
